@@ -1,3 +1,4 @@
+from typing import Counter
 from yahoo_fin import stock_info as si
 from tkinter import *
 from tkinter import messagebox
@@ -21,18 +22,13 @@ def organizeOutput(root, n, stock):
         elif column == 1:
             column =0
             row += 1
-        
+
+
+counter = 0
+scraping = Scraping()
 
 class Stock:
-    
-    def __init__(self): #constructor # attributes are added after self
-        global counter
-        counter = 0
-        
-        global scraping
-        scraping = Scraping()
 
-    
 
     def takeScreenshot (self):
         scraping.openWebDriver()
@@ -47,6 +43,7 @@ class Stock:
     def frameInputStock(self, root, winChance, stock, risk, account):
         frameInput = LabelFrame(root)
         frameInput.pack()
+        global counter
         Label(frameInput, text = functions.returnOrdinal(counter+1) + " stock").grid(row =0, column = 1)
 
         Label(frameInput, text = "Enter the ticker").grid(row =1, column =0, sticky = 'w')
@@ -69,65 +66,65 @@ class Stock:
             wasWinChanceNull = True
 
         def clickNextStock(isFinished = False):
-            try:
-                #assign to attributes
-                self.ticker = (entryTicker.get()).upper()
-                self.stopLoss = float(entrystopLoss.get())
-                self.targetPrice = float(entryTargetPrice.get())
-                self.currentPrice = round(si.get_live_price(self.ticker), 2)
-                self.currentPrice = self.currentPrice.item()
-                self.currentPrice = self.currentPrice
-                global counter
-                #   threading.Thread(target = stock[counter].takeScreenshot).start()
-                stock[counter].takeScreenshot()
+            # try:
+            #assign to attributes
+            self.ticker = (entryTicker.get()).upper()
+            self.stopLoss = float(entrystopLoss.get())
+            self.targetPrice = float(entryTargetPrice.get())
+            self.currentPrice = round(si.get_live_price(self.ticker), 2)
+            self.currentPrice = self.currentPrice.item()
+            self.currentPrice = self.currentPrice
+            global counter
+            #threading.Thread(target = stock[counter].takeScreenshot).start()
+            stock[counter].takeScreenshot()
 
-                nonlocal winChance
-                if winChance is None:
-                    winChance = float(entryWinChance.get())
+            nonlocal winChance
+            if winChance is None:
+                winChance = float(entryWinChance.get())
 
-                self.winChance = winChance
-                self.lossChance = 1 - self.winChance
-                self.expectancy =100 * abs(((self.targetPrice - self.currentPrice) / self.currentPrice)) * self.winChance - abs(((self.currentPrice - self.stopLoss) / self.currentPrice)) * self.lossChance
-                self.quantity = int((account * (risk / 100)) / abs((self.currentPrice - self.stopLoss)))
-                
-                
-                self.cost = round(self.currentPrice * self.quantity, 2)
-                self.expectedProfit = round(abs(self.currentPrice - self.targetPrice) * self.quantity, 2)
-                if self.currentPrice > self.targetPrice:
-                    self.isLong = False
-                else:
-                    self.isLong = True
-
-                if self.isLong == True:
-                    self.transaction = "Buy"
-                else:
-                    self.transaction = "Sell Short"
-                frameInput.destroy()
-
-                counter += 1
-                n = counter
-                
-                if(wasWinChanceNull == True):
-                    winChance = None
-                
-                if isFinished == True:
-                    stock.sort(key=lambda x: x.expectancy, reverse=True)
-                    Label(root, text = "Results       ").pack()
-                    
-                    global mainFrame
-                    mainFrame = VerticalScrolledFrame(root, width=1700, borderwidth=2, relief=SUNKEN, background="light gray")
-                    mainFrame.pack(fill="both", expand=True)
-                    organizeOutput(root, n, stock)
-                else:
-                    stock.append(Stock())
-                    stock[counter].frameInputStock(root, winChance, stock, risk, account)
+            self.winChance = winChance
+            self.lossChance = 1 - self.winChance
+            self.expectancy =100 * abs(((self.targetPrice - self.currentPrice) / self.currentPrice)) * self.winChance - abs(((self.currentPrice - self.stopLoss) / self.currentPrice)) * self.lossChance
+            self.quantity = int((account * (risk / 100)) / abs((self.currentPrice - self.stopLoss)))
             
-            except:
-                if wasWinChanceNull == True:
-                    winChance = None
-                messagebox.showerror("Error", "Wrong entry. Please try again!")
-                frameInput.destroy()
+            
+            self.cost = round(self.currentPrice * self.quantity, 2)
+            self.expectedProfit = round(abs(self.currentPrice - self.targetPrice) * self.quantity, 2)
+            if self.currentPrice > self.targetPrice:
+                self.isLong = False
+            else:
+                self.isLong = True
+
+            if self.isLong == True:
+                self.transaction = "Buy"
+            else:
+                self.transaction = "Sell Short"
+            frameInput.destroy()
+
+            counter += 1
+            n = counter
+            
+            if(wasWinChanceNull == True):
+                winChance = None
+            
+            if isFinished == True:
+                stock.sort(key=lambda x: x.expectancy, reverse=True)
+                Label(root, text = "Results       ").pack()
+                
+                global mainFrame
+                mainFrame = VerticalScrolledFrame(root, width=1700, borderwidth=2, relief=SUNKEN, background="light gray")
+                mainFrame.pack(fill="both", expand=True)
+                organizeOutput(root, n, stock)
+            else:
+                stock.append(Stock())
                 stock[counter].frameInputStock(root, winChance, stock, risk, account)
+            
+            # except:
+            #     if wasWinChanceNull == True:
+            #         winChance = None
+            #     messagebox.showerror("Error", "Wrong entry. Please try again!")
+            #     frameInput.destroy()
+            #     stock[counter].frameInputStock(root, winChance, stock, risk, account)
             
             
 
@@ -167,7 +164,7 @@ class Stock:
 
     def frameOutput(self, root, rowNo, columnNo, counter, stock):
         def setEntryLimitPrice (entryLimitPrice):
-            entryLimitPrice.grid(row = 2, column = 0)
+            entryLimitPrice.grid(row = 2, column =0)
             if self.isLong == True:
                 entryLimitPrice.insert(0, self.currentPrice + 0.02)
             else:
