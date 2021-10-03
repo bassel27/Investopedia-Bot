@@ -14,4 +14,4 @@ Upon running the program, you get this window which asks you about the **risk pe
 
 Then, you'll ahve this window for each stock that you're interested in. The first entry is for the ticker (symbol) of the stock. The second is for the target price (what price you want the stock to reach). The third entry is for the stop loss price (the price at which you accept your loss and exit the trade.) If you've got more stocks that you're intersted in, then you can press "Onto the next stock" button. If this is the last stock, then you can press "finish" to display the results.
 
-![image](https://user-images.githubusercontent.com/40627412/135750554-0b08ed43-5e36-44c4-9c6b-24200705bd6e.png)
+![image](https://user-images.githubusercontent.com/40627412/135750914-2b92c67f-d3f7-4b67-91a0-84b03a4dcb7b.png)
