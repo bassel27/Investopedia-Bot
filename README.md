@@ -6,6 +6,11 @@ that I always recommend for beginners due to its simplicity. Second, this progra
 Investopedia Trading asks you to enter the stocks you're interested in to calculate their expectancies (a measure to show which stocks are gonna make you more money and less risky).
 It also shows you stock data to enable you to make decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically. Also, upon clicking "Execute trade", a new record on your notion database (trading journal) is added automatically.
 ## Necessary Prerequisites
+First, 
+Second, you got to add uBlock Origin (chrome extension) files to the program directory. To do that:
+1. Add uBlock Origin as an extension on chrome shorturl.at/qvCLM
+2. Now assuming you are on windows, go to 'C:\Users\YOUR_USER_NAME\AppData\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm'
+3. There should be a folder with a number (the version number). Copy that folder and paste it in the program directory.
 
 ## How to Use Investopedia Trading?
 Upon running the program, you get this window which asks you about the **risk percentage**: how much of your cash are you ready to lose on a single trade? Risk percentage is often 2% for people with much cash. People with less cash tend to increase it to 5%. If you uncheck 2%, you can enter your own risk percentage. Secondly, the program will ask you about the chance of winning which set by default to 0.9 to all stocks. If you uncheck it, you'll have to enter winning chance to each individual stock. Thirdly, below the two checkboxes you'll find thee account value and cash. These values are scraped from your Investopedia profile.
