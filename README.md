@@ -9,7 +9,7 @@ It also shows you stock data to enable you to make decisoin. After you choose th
 First, in lines 52 and 53 in the scraping.py file, you got to replace `creds.username` and `creds.password` with your Investopedia's email and password.
 Second, you got to add uBlock Origin (chrome extension) files to the program directory. To do that:
 1. Add uBlock Origin as an extension on chrome shorturl.at/qvCLM
-2. Now assuming you are on windows, go to 'C:\Users\YOUR_USER_NAME\AppData\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm'
+2. Now assuming you are on windows, go to `C:\Users\YOUR_USER_NAME\AppData\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm`
 3. There should be a folder with a number (the version number). Copy that folder and paste it in the program directory.
 
 ## How to Use Investopedia Trading?
