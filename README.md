@@ -17,6 +17,10 @@ Upon running the program, you get this window which asks you about the **risk pe
 
 ![image](https://user-images.githubusercontent.com/40627412/135750345-24be1cf0-889d-4085-a896-03318fb0a248.png)
 
-Then, you'll ahve this window for each stock that you're interested in. The first entry is for the ticker (symbol) of the stock. The second is for the target price (what price you want the stock to reach). The third entry is for the stop loss price (the price at which you accept your loss and exit the trade.) If you've got more stocks that you're intersted in, then you can press "Onto the next stock" button. If this is the last stock, then you can press "finish" to display the results.
+Then, you'll have this window for each stock that you're interested in. The first entry is for the ticker (symbol) of the stock. The second is for the target price (what price you want the stock to reach). The third entry is for the stop loss price (the price at which you accept your loss and exit the trade.) If you've got more stocks that you're intersted in, then you can press "Onto the next stock" button. If this is the last stock, then you can press "finish" to display the results.
 
 ![image](https://user-images.githubusercontent.com/40627412/135750914-2b92c67f-d3f7-4b67-91a0-84b03a4dcb7b.png)
+
+After you enter the stocks you're interested in, the results are displayed. Upon clicking on "Execute order", the order is automatically placed on Investopedia. You get to choose the type of order (either market or limit order) and also specify the price of the limit order. The number of shares that are to be bought/ shorted is displayed. The number of shares is calculated through the following rule: `position size (numebr of shares) = Max loss per trade/ amount you can lose per share` or in other words: ` = quantity = account value * (risk percentage / 100) / (|current price - stop loss price|)`. 
+
+![image](https://user-images.githubusercontent.com/40627412/136072260-660f6a72-d608-48ef-b480-ac4e3728974b.png)
