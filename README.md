@@ -1,5 +1,6 @@
 # Investopedia-Trading
 ![Investopedia-2017](https://user-images.githubusercontent.com/40627412/136075564-c1179715-164c-4e87-b81c-154adf20fb41.png)
+
 Investopedia Trading is a tkitner python program that's suitable for beginner who want to enter the trading world. First, Investopedia Stock Simulator is an excellent simulator 
 that I always recommend for beginners due to its simplicity. Second, this program helps you automate your Investopedia trading game and take it to the next level. 
 ## What Does Investopedia Trading do?
