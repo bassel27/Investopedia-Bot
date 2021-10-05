@@ -5,7 +5,7 @@ that I always recommend for beginners due to its simplicity. Second, this progra
 ## What Does Investopedia Trading do?
 Investopedia Trading asks you to enter the stocks you're interested in to calculate their expectancies (a measure to show which stocks are gonna make you more money and less risky).
 It also shows you stock data to enable you to make decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically. Also, upon clicking "Execute trade", a new record on your notion database (trading journal) is added automatically.
-## Necessary Prerequisites
+## Setup
 First, in lines 52 and 53 in the scraping.py file, you got to replace `creds.username` and `creds.password` with your Investopedia's email and password.
 Second, you got to add uBlock Origin (chrome extension) files to the program directory. To do that:
 1. Add uBlock Origin as an extension on chrome shorturl.at/qvCLM
