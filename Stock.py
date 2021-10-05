@@ -78,14 +78,6 @@ class Stock:
                 self.currentPrice = self.currentPrice
                 
                 global counter
-
-                if isFinished == False:
-                    thread = threading.Thread(target = stock[counter].takeScreenshot)
-                    thread.start()
-                    global threads
-                    threads.append(thread)
-                else:
-                    stock[counter].takeScreenshot()
                     
                 nonlocal winChance
                 if winChance is None:
@@ -117,6 +109,8 @@ class Stock:
                 n = counter
 
                 if isFinished == True:
+                    global threads
+                    stock[counter-1].takeScreenshot()
                     stock.sort(key=lambda x: x.expectancy, reverse=True)
                     Label(root, text = "Results       ").pack()
                     
@@ -125,8 +119,13 @@ class Stock:
                     mainFrame.pack(fill="both", expand=True)
                     organizeOutput(root, n, stock)
                 else:
+                    thread = threading.Thread(target = stock[counter-1].takeScreenshot)
+                    thread.start()
+                    threads.append(thread)
+
                     stock.append(Stock())
                     stock[counter].frameInputStock(root, winChance, stock, risk, account)
+
             
             except:
                 if wasWinChanceNull == True:

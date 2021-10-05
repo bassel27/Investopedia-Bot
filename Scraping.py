@@ -148,5 +148,3 @@ class Scraping:
         self.setSendEmail(sendEmail)
         self.previewAndSubmit()
         return maxQuantity
-
-
