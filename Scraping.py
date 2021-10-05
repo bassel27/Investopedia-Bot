@@ -11,6 +11,7 @@ class Scraping:
     def openWebDriver(self):
         ublockPath = r'C:\Users\Bassel Attia\Documents\Trading Core\1.37.2_0'
         chromeOptions = Options()
+        chromeOptions.add_argument("--log-level=3")
         # chromeOptions.add_argument('--headless')
         # chromeOptions.add_argument('--log-level=1')
         chromeOptions.add_argument('load-extension=' + ublockPath)
@@ -147,3 +148,5 @@ class Scraping:
         self.setSendEmail(sendEmail)
         self.previewAndSubmit()
         return maxQuantity
+
+
