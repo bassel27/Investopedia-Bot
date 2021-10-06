@@ -9,7 +9,7 @@ import time
 
 class Scraping:
     def openWebDriver(self):
-        ublockPath = r'C:\Users\Bassel Attia\Documents\Trading Core\1.37.2_0'
+        ublockPath = r'Path of the uBlock origin extension folder '
         chromeOptions = Options()
         chromeOptions.add_argument("--log-level=3")
         # chromeOptions.add_argument('--headless')
