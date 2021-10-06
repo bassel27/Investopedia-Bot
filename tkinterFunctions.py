@@ -27,7 +27,7 @@ def intro(root):
     global frameInput 
     frameInput = LabelFrame(root)
     frameInput.pack()
-    root.iconbitmap(r'C:\Users\Bassel Attia\Documents\Trading Core\money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
+    root.iconbitmap(r'Put the path of money_icon.ico here')      #because it's in the same directory as your program, you don't need to type the whole address
 
 
 
