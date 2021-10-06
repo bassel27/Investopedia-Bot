@@ -12,8 +12,10 @@ Second, you got to add uBlock Origin (chrome extension) files to the program dir
 1. Add uBlock Origin as an extension on chrome shorturl.at/qvCLM
 2. Now assuming you are on windows, go to `C:\Users\YOUR_USER_NAME\AppData\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm`
 3. There should be a folder with a number (the version number). Copy that folder and paste it in the program directory.
+
 Third, you got to add the paths of some folders and files:
 1. In line 12 in Scraping.py you gotta add the path of ublock origin extension. It'll be something like this for example `C:\Users\Bassel Attia\Documents\Trading Core\1.37.2_0`
+
 Fourth, you got to make the program access your notion databse. If you don't want to use notion, you can simply delete the `addNotionRow` method and delete the lines, in which it's called; they're all present in the `Stock.py` file. However, if you want to use notion then follow along. In line 258 you should add your notion database's token; follow this video https://www.youtube.com/watch?v=6sJFI8LbhpY&t=436s from 4:30 to do that. You also got to paste your database url in line 260.
 ## How to Use Investopedia Trading?
 Upon running the program, you get this window which asks you about the **risk percentage**: how much of your cash are you ready to lose on a single trade? Risk percentage is often 2% for people with much cash. People with less cash tend to increase it to 5%. If you uncheck 2%, you can enter your own risk percentage. Secondly, the program will ask you about the chance of winning which set by default to 0.9 to all stocks. If you uncheck it, you'll have to enter winning chance to each individual stock. Thirdly, below the two checkboxes you'll find thee account value and cash. These values are scraped from your Investopedia profile.
