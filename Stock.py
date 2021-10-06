@@ -255,9 +255,9 @@ class Stock:
         from notion.client import NotionClient
         from datetime import date
 
-        token = '67b7199ace904372cbae57a459653444771919d681a4e3aac217ef01dacfba380a7c5c378bfb713cd31472ec4de18484a9a6c3a7fe2d86f292459b1d1d6d27cea36cf5de4a7aa62318ee87084e55'
+        token = 'your notion token'
         client = NotionClient(token_v2=token)
-        listUrl = 'https://www.notion.so/19338d10174b463cb6ce4fba6e82c18a?v=5237d4d9360d4deaaf9b79e59ae05edb'
+        listUrl = 'Database link'
         collectionView = client.get_collection_view(listUrl)
         if tkinterFunctions.cash>= self.cost: #error
             newRow = collectionView.collection.add_row()
