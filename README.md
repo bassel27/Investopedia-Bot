@@ -7,6 +7,7 @@ Investopedia Bot asks you to enter the stocks you're interested in to calculate 
 It also shows you stock data and recommends you the number of shares to be bought according to many factors that you decide on; all of that in order to facilitate reaching a decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically as well as make a new record in your Notion database (trading journal) with the info of your trade. 
 ## Setup
 First, in lines 52 and 53 in the scraping.py file, you got to replace `creds.username` and `creds.password` with your Investopedia's email and password.
+
 Second, you got to add uBlock Origin (chrome extension) files to the program directory. To do that:
 1. Add uBlock Origin as an extension on chrome shorturl.at/qvCLM
 2. Now assuming you are on windows, go to `C:\Users\YOUR_USER_NAME\AppData\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm`
