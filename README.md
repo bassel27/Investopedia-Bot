@@ -14,18 +14,21 @@ Second, you got to add uBlock Origin (chrome extension) files to the program dir
 3. There should be a folder with a number (the version number). Copy that folder and paste it in the program directory.
 
 Third, you got to add the paths of some folders and files:
-1. In line 12 in Scraping.py you gotta add the path of ublock origin extension. It'll be something like this for example `C:\Users\Bassel Attia\Documents\Trading Core\1.37.2_0`
-2. In line 30 in `tkinterFuncitons.py`, you got to add the path of the icon of the program that is called `money_icon.ico`. The path should be somehting like this `C:\Users\Bassel Attia\Documents\Trading Core\money_icon.ico`.
+1. In line 12 in Scraping.py you gotta add the path of ublock origin extension. It'll be something like this for example `C:\Users\Bassel Attia\Documents\Investopedia Bot\1.37.2_0`
+2. In line 30 in `tkinterFuncitons.py`, you got to add the path of the icon of the program that is called `money_icon.ico`. The path should be somehting like this `C:\Users\Bassel Attia\Documents\Investopedia Bot\money_icon.ico`.
 Fourth, you got to make the program access your notion databse. If you don't want to use notion, you can simply delete the `addNotionRow` method and delete the lines, in which it's called; they're all present in the `Stock.py` file. However, if you want to use notion then follow along. In line 258 you should add your notion database's token; follow this video https://www.youtube.com/watch?v=6sJFI8LbhpY&t=436s from 4:30 to do that. You also got to paste your database url in line 260.
 ## How to Use Investopedia Trading?
 ### First Stage
 Upon running the program, you get this window which asks you about the **risk percentage**: how much of your cash are you ready to lose on a single trade? Risk percentage is often 2% if you have much cash. On the other hand, people with less cash tend to increase it to 5%. If you uncheck 2%, you can enter your own risk percentage. Secondly, the program will ask you about the chance of winning which set by default to 0.9 to all stocks. If you uncheck it, you'll have to enter winning chance to each individual stock. Thirdly, below the two checkboxes you'll find the account value and cash. These values are scraped from your Investopedia profile.
 
-![image](https://user-images.githubusercontent.com/40627412/136840322-22fc2ed5-04e4-430c-9fc1-bd4f6a78d34c.png)
+![image](https://user-images.githubusercontent.com/40627412/136844357-76fa68f2-5ea8-4626-b633-ba1c21baef12.png)
+
 
 ![image](https://user-images.githubusercontent.com/40627412/135750345-24be1cf0-889d-4085-a896-03318fb0a248.png)
 ### Seocnd Stage
 Then, you'll have this window for each stock that you're interested in. The first entry is for the ticker (symbol) of the stock. The second is for the target price (what price you think the stock will reach). The third entry is for the stop loss price (the price at which you accept your loss and exit the trade.) If you've got more stocks that you're intersted in, then you can press "Onto the next stock" button. If this is the last stock, then you can press "finish" to display the results.
+
+![image](https://user-images.githubusercontent.com/40627412/136844395-f4694ab3-1a72-474d-9629-348207852646.png)
 
 ![image](https://user-images.githubusercontent.com/40627412/135750914-2b92c67f-d3f7-4b67-91a0-84b03a4dcb7b.png)
 ### Third Stage
