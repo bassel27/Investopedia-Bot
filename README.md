@@ -20,6 +20,7 @@ Fourth, you got to make the program access your notion databse. If you don't wan
 ## How to Use Investopedia Trading?
 ### First Stage
 Upon running the program, you get this window which asks you about the **risk percentage**: how much of your cash are you ready to lose on a single trade? Risk percentage is often 2% if you have much cash. On the other hand, people with less cash tend to increase it to 5%. If you uncheck 2%, you can enter your own risk percentage. Secondly, the program will ask you about the chance of winning which set by default to 0.9 to all stocks. If you uncheck it, you'll have to enter winning chance to each individual stock. Thirdly, below the two checkboxes you'll find the account value and cash. These values are scraped from your Investopedia profile.
+
 ![image](https://user-images.githubusercontent.com/40627412/136840322-22fc2ed5-04e4-430c-9fc1-bd4f6a78d34c.png)
 
 ![image](https://user-images.githubusercontent.com/40627412/135750345-24be1cf0-889d-4085-a896-03318fb0a248.png)
