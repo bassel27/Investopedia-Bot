@@ -111,7 +111,6 @@ class Scraping:
         for word in (maxQuantityText.text).split():
             if word.isdigit():
                 maxQuantity = int(word)
-
         return maxQuantity
 
     def setQuantity (self, quantity):
@@ -142,8 +141,10 @@ class Scraping:
         self.acceptCookies()
         self.setStock(ticker)
         self.setTransaction(transaction)
-        self.setQuantity(quantity)
         maxQuantity = self.getMaxQuantity()
+        if quantity > maxQuantity:
+            quantity = maxQuantity
+        self.setQuantity(quantity)
         self.setOrderType(orderType, limitPrice)
         self.setSendEmail(sendEmail)
         self.previewAndSubmit()
