@@ -7,7 +7,7 @@ import functions
 from Scraping import *
 from Scrollbar import * 
 import threading
-import time
+from tkinter import ttk
 import tkinterFunctions
 
 def organizeOutput(root, n, stock): 
@@ -48,89 +48,89 @@ class Stock:
         Label(frameInput, text = functions.returnOrdinal(counter+1) + " stock").grid(row =0, column = 1)
 
         Label(frameInput, text = "Enter the ticker").grid(row =1, column =0, sticky = 'w')
-        entryTicker = Entry(frameInput, borderwidth = 5)
+        entryTicker = ttk.Entry(frameInput)
         entryTicker.grid(row =1, column =1)
 
         Label(frameInput, text = "Enter your target price").grid(row = 2, column =0, sticky = 'w')
-        entryTargetPrice = Entry(frameInput, borderwidth=5)
+        entryTargetPrice = ttk.Entry(frameInput)
         entryTargetPrice.grid(row =2, column = 1)
 
         Label(frameInput, text = "Enter your stop loss price").grid(row = 3, column =0, sticky = 'w')
-        entrystopLoss = Entry(frameInput, borderwidth=5)
+        entrystopLoss = ttk.Entry(frameInput)
         entrystopLoss.grid(row =3, column = 1)
         
         wasWinChanceNull = False
         if(winChance is None):
             Label(frameInput, text = "Enter win chance").grid(row = 4, column = 0, sticky = 'w')
-            entryWinChance = Entry(frameInput, borderwidth = 5)
+            entryWinChance = ttk.Entry(frameInput)
             entryWinChance.grid(row = 4, column = 1)
             wasWinChanceNull = True
     
         def clickNextStock(isFinished = False):
-            # try:
-            #assign to attributes
-            self.ticker = (entryTicker.get()).upper()
-            self.stopLoss = float(entrystopLoss.get())
-            self.targetPrice = float(entryTargetPrice.get())
-            self.currentPrice = float(si.get_live_price(self.ticker))
-            print(type(self.currentPrice))
-            
-            global counter
+            try:
+                #assign to attributes
+                self.ticker = (entryTicker.get()).upper()
+                self.stopLoss = float(entrystopLoss.get())
+                self.targetPrice = float(entryTargetPrice.get())
+                self.currentPrice = float(si.get_live_price(self.ticker))
+                print(type(self.currentPrice))
                 
-            nonlocal winChance
-            if winChance is None:
-                winChance = float(entryWinChance.get())
+                global counter
+                    
+                nonlocal winChance
+                if winChance is None:
+                    winChance = float(entryWinChance.get())
 
-            self.winChance = winChance
-            self.lossChance = 1 - self.winChance
-            self.expectancy =100 * abs(((self.targetPrice - self.currentPrice) / self.currentPrice)) * self.winChance - abs(((self.currentPrice - self.stopLoss) / self.currentPrice)) * self.lossChance
-            self.quantity = int((account * (risk / 100)) / abs((self.currentPrice - self.stopLoss)))
-            
-            
-            self.cost = self.currentPrice * self.quantity
-            self.expectedProfit = abs(self.currentPrice - self.targetPrice) * self.quantity
-            if self.currentPrice > self.targetPrice:
-                self.isLong = False
-            else:
-                self.isLong = True
-
-            if self.isLong == True:
-                self.transaction = "Buy"
-            else:
-                self.transaction = "Sell Short"
-            frameInput.destroy()
-            
-            if(wasWinChanceNull == True):
-                winChance = None
-
-            counter += 1
-            n = counter
-
-            if isFinished == True:
-                global threads
-                stock[counter-1].takeScreenshot()
-                stock.sort(key=lambda x: x.expectancy, reverse=True)
-                Label(root, text = "Results       ").pack()
+                self.winChance = winChance
+                self.lossChance = 1 - self.winChance
+                self.expectancy =100 * abs(((self.targetPrice - self.currentPrice) / self.currentPrice)) * self.winChance - abs(((self.currentPrice - self.stopLoss) / self.currentPrice)) * self.lossChance
+                self.quantity = int((account * (risk / 100)) / abs((self.currentPrice - self.stopLoss)))
                 
-                global mainFrame
-                mainFrame = VerticalScrolledFrame(root, width=1700, borderwidth=2, relief=SUNKEN, background="light gray")
-                mainFrame.pack(fill="both", expand=True)
-                organizeOutput(root, n, stock)
-            else:
-                thread = threading.Thread(target = stock[counter-1].takeScreenshot)
-                thread.start()
-                threads.append(thread)
+                
+                self.cost = self.currentPrice * self.quantity
+                self.expectedProfit = abs(self.currentPrice - self.targetPrice) * self.quantity
+                if self.currentPrice > self.targetPrice:
+                    self.isLong = False
+                else:
+                    self.isLong = True
 
-                stock.append(Stock())
+                if self.isLong == True:
+                    self.transaction = "Buy"
+                else:
+                    self.transaction = "Sell Short"
+                frameInput.destroy()
+                
+                if(wasWinChanceNull == True):
+                    winChance = None
+
+                counter += 1
+                n = counter
+
+                if isFinished == True:
+                    global threads
+                    stock[counter-1].takeScreenshot()
+                    stock.sort(key=lambda x: x.expectancy, reverse=True)
+                    Label(root, text = "Results       ").pack()
+                    
+                    global mainFrame
+                    mainFrame = VerticalScrolledFrame(root, width=1700, borderwidth=2, relief=SUNKEN, background="light gray")
+                    mainFrame.pack(fill="both", expand=True)
+                    organizeOutput(root, n, stock)
+                else:
+                    thread = threading.Thread(target = stock[counter-1].takeScreenshot)
+                    thread.start()
+                    threads.append(thread)
+
+                    stock.append(Stock())
+                    stock[counter].frameInputStock(root, winChance, stock, risk, account)
+
+            
+            except:
+                if wasWinChanceNull == True:
+                    winChance = None
+                messagebox.showerror("Error", "Wrong entry. Please try again!")
+                frameInput.destroy()
                 stock[counter].frameInputStock(root, winChance, stock, risk, account)
-
-            
-            # except:
-            #     if wasWinChanceNull == True:
-            #         winChance = None
-            #     messagebox.showerror("Error", "Wrong entry. Please try again!")
-            #     frameInput.destroy()
-            #     stock[counter].frameInputStock(root, winChance, stock, risk, account)
             
             
 
@@ -159,9 +159,9 @@ class Stock:
             entryWinChance.bind('<KeyRelease>', checkEntry)  
 
         
-        buttonNextStock = Button(frameInput, text = "Onto the next stock", fg='green', command = clickNextStock, state = DISABLED)
+        buttonNextStock = ttk.Button(frameInput, text = "Onto the next stock", command = clickNextStock, state = DISABLED)
         buttonNextStock.grid(row = 5, column =1)
-        buttonFinish = Button(frameInput, text = "Finish", fg = 'green', command = lambda: clickNextStock(isFinished = True), state=DISABLED)
+        buttonFinish = ttk.Button(frameInput, text = "Finish", command = lambda: clickNextStock(isFinished = True), state=DISABLED)
         buttonFinish.grid(row = 6, column =1)
         
             
@@ -170,6 +170,7 @@ class Stock:
 
     def frameOutput(self, root, rowNo, columnNo, counter, stock):
         def setEntryLimitPrice (entryLimitPrice):
+            entryLimitPrice.delete(0, 'end')
             entryLimitPrice.grid(row = 2, column =0)
             if self.isLong == True:
                 entryLimitPrice.insert(0, round(self.currentPrice + 0.02, 2))
@@ -181,15 +182,16 @@ class Stock:
         Label(frameOutput, text = str(counter + 1) + ". " + self.ticker).grid(row = 0, column = 0, sticky = 'w')
         Label(frameOutput, text = f"Expectancy: {self.expectancy:.2f}%").grid(row = 1, column = 0, sticky = 'w')
         
-        Label(frameOutput, text = "                          order: ").grid(row = 2, column = 0, sticky = 'w' )
-        entryLimitPrice = Entry(frameOutput)
+        Label(frameOutput, text = "                         order: ").grid(row = 2, column = 0, sticky = 'w' )
+        entryLimitPrice = ttk.Entry(frameOutput)
         setEntryLimitPrice(entryLimitPrice)
         var = StringVar()
         var.set("Limit")
-        orderTypeDropDown = OptionMenu(frameOutput, var, "Limit", "Market")
+        options = ["Limit", "Market"]
+        orderTypeDropDown = ttk.OptionMenu(frameOutput, var, options[0], *options )
         orderTypeDropDown.grid(row = 2, column = 0, sticky = 'w')        
         def dropDownFunction(*args):
-            if var.get() == "Limit":
+            if var.get() == options[0]:
                 setEntryLimitPrice(entryLimitPrice)        
             else:
                 entryLimitPrice.delete(0, 'end')
@@ -245,7 +247,7 @@ class Stock:
         
         Label(frameOutput, text = "Execute trade?").grid(row = 8, column = 0, sticky = 'w')
         checkButtonExecuteVar = IntVar()
-        checkButtonExecute = Checkbutton(frameOutput, variable = checkButtonExecuteVar, command = isCheckButtonChecked, activeforeground='green')
+        checkButtonExecute = ttk.Checkbutton(frameOutput, variable = checkButtonExecuteVar, command = isCheckButtonChecked)
         checkButtonExecute.grid(row = 8, column = 1)
         counter +=1
 
@@ -254,9 +256,9 @@ class Stock:
         from notion.client import NotionClient
         from datetime import date
 
-        token = 'your notion token'
+        token = '67b7199ace904372cbae57a459653444771919d681a4e3aac217ef01dacfba380a7c5c378bfb713cd31472ec4de18484a9a6c3a7fe2d86f292459b1d1d6d27cea36cf5de4a7aa62318ee87084e55'
         client = NotionClient(token_v2=token)
-        listUrl = 'Database link'
+        listUrl = 'https://www.notion.so/19338d10174b463cb6ce4fba6e82c18a?v=5237d4d9360d4deaaf9b79e59ae05edb'
         collectionView = client.get_collection_view(listUrl)
         if tkinterFunctions.cash>= self.cost: #error
             newRow = collectionView.collection.add_row()
