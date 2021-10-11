@@ -21,14 +21,14 @@ def atExit(root):
     root.protocol('WM_DELETE_WINDOW', exitMessage)
 
 def intro(root):
-    root.title("Trading Core")
+    root.title("Investopedia Bot")
     global title
-    title = ttk.Label (root, text = "Trading Core")    #to create anything in tkinter, you have to do it in 2 steps: define the thing and put it on the screen
+    title = ttk.Label (root, text = "Investopedia Bot")    #to create anything in tkinter, you have to do it in 2 steps: define the thing and put it on the screen
     title.pack()    #putting the label on the screen
     global frameInput 
     frameInput = ttk.LabelFrame(root)
     frameInput.pack()
-    root.iconbitmap(r'C:\Users\Bassel Attia\Documents\Trading Core\money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
+    root.iconbitmap(r'C:\Users\Bassel Attia\Documents\Investopedia Bot\money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
 
 
 
