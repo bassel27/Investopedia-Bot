@@ -16,7 +16,7 @@ class Scraping:
         # chromeOptions.add_argument('--log-level=1')
         chromeOptions.add_argument('load-extension=' + ublockPath)
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chromeOptions)     #to create the instance of chrome WebDriver
-        #self.driver.set_window_position(-10000,0)
+        self.driver.set_window_position(-10000,0)
         
     def getFinviz(self, ticker):
         self.driver.get('https://finviz.com/quote.ashx?t=' + ticker)
