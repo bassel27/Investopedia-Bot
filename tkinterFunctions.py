@@ -3,6 +3,7 @@ from tkinter import messagebox
 from functions import *
 from Stock import *
 from Scraping import *
+from tkinter import ttk
 
 def atExit(root):
     def exitMessage():
@@ -22,12 +23,12 @@ def atExit(root):
 def intro(root):
     root.title("Trading Core")
     global title
-    title = Label (root, text = "Trading Core")    #to create anything in tkinter, you have to do it in 2 steps: define the thing and put it on the screen
+    title = ttk.Label (root, text = "Trading Core")    #to create anything in tkinter, you have to do it in 2 steps: define the thing and put it on the screen
     title.pack()    #putting the label on the screen
     global frameInput 
-    frameInput = LabelFrame(root)
+    frameInput = ttk.LabelFrame(root)
     frameInput.pack()
-    root.iconbitmap(r'Put the path of money_icon.ico here')      #because it's in the same directory as your program, you don't need to type the whole address
+    root.iconbitmap(r'C:\Users\Bassel Attia\Documents\Trading Core\money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
 
 
 
@@ -61,8 +62,8 @@ def enableButtonNext(root):
             
 
 
-    buttonNext = Button(frameInput, text = "Next!", width = 20, height = 2, fg = 'green', bg = 'white', command= clickNext)   #note that the function name is mentioned without
-    buttonNext.grid(row = 2, column = 1)
+    buttonNext = ttk.Button(frameInput, text = "Next!", command= clickNext)   #note that the function name is mentioned without
+    buttonNext.grid(row = 2, column = 1, ipady=2, ipadx=20)
     
     
 
@@ -78,7 +79,7 @@ def checkButtonStuff():
 
     global checkButtonRiskVar
     checkButtonRiskVar = IntVar(value = 1)
-    checkButtonIsRiskDefault = Checkbutton(frameInput, variable = checkButtonRiskVar, command=isCheckButtonChecked, activeforeground='green')
+    checkButtonIsRiskDefault = ttk.Checkbutton(frameInput, variable = checkButtonRiskVar, command=isCheckButtonChecked)
     Label(frameInput, text="Make risk = 2%?").grid(row= 0, column = 0, sticky = 'w')
     checkButtonIsRiskDefault.grid(row = 0, column = 1)
 
@@ -88,7 +89,7 @@ def checkButtonStuff():
     
     global checkButtonChanceVar
     checkButtonChanceVar = IntVar(value = 1)
-    checkButtonIsChanceDefault = Checkbutton(frameInput, variable = checkButtonChanceVar, command=isCheckButtonChecked, activeforeground='green')
+    checkButtonIsChanceDefault = ttk.Checkbutton(frameInput, variable = checkButtonChanceVar, command=isCheckButtonChecked)
     Label(frameInput, text="Make chance = 0.9?").grid(row=1, column = 0, sticky = 'w')
     checkButtonIsChanceDefault.grid(row = 1, column = 1)
 
@@ -103,7 +104,7 @@ def  frameAccAndCash(root):
     account, cash = scraping.scrapeAccCash()
     scraping.quitDriver()
     global frameAccAndCash
-    frameAccAndCash = LabelFrame(root)
+    frameAccAndCash = ttk.LabelFrame(root)
     frameAccAndCash.pack()
     Label(frameAccAndCash, fg = 'green', text = ("Account value = " + str(account)+ " $"+ "   -   " + "cash = "+ str(cash) + " $")).grid(column =1 , row =0)
 
