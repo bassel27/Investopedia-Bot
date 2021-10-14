@@ -266,6 +266,7 @@ class Stock:
             newRow.Quantity = self.quantity
             newRow.Filled_in_by_python = True
             newRow.Stop_loss = str(self.stopLoss)
+            newRow.Expected_profit = str(round(self.expectedProfit, 2))
             if self.isLong == True:
                 newRow.Strategy = "Long"
                 newRow.Date_Bought = date.today()
