@@ -22,9 +22,6 @@ def atExit(root):
 
 def intro(root):
     root.title("Investopedia Bot")
-    global title
-    title = ttk.Label (root, text = "Investopedia Bot")    #to create anything in tkinter, you have to do it in 2 steps: define the thing and put it on the screen
-    title.pack()    #putting the label on the screen
     global frameInput 
     frameInput = ttk.LabelFrame(root)
     frameInput.pack()
@@ -35,10 +32,8 @@ def enableButtonNext(root):
         try:
             if checkButtonRiskVar:
                 risk = 2
-
             else:
                 risk = entryRisk.get()
-
             frameInput.destroy()
             frameAccAndCash.destroy()
         except:

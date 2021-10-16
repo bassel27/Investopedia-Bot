@@ -45,64 +45,51 @@ class Scraping:
         self.driver.quit()   
 
 
-    def login (self):
-        self.driver.get(r'https://www.investopedia.com/auth/realms/investopedia/protocol/openid-connect/auth?scope=email&state=efce4bc80385e2710878f031749d464a&response_type=code&approval_prompt=auto&redirect_uri=https%3A%2F%2Fwww.investopedia.com%2Fsimulator%2Fhome.aspx&client_id=inv-simulator-conf')
+    def login(self):
+        self.driver.get(r'https://www.investopedia.com/simulator/home.aspx')
 
-        username = self.driver.find_element_by_id('username')
-        password = self.driver.find_element_by_id('password')
+        self.driver.find_element_by_id('username').send_keys(config.INVESTOPEDIA_EMAIL)
+        self.driver.find_element_by_id('password').send_keys(config.INVESTOPEDIA_PASSW)
 
-        username.send_keys(config.INVESTOPEDIA_EMAIL)
-        password.send_keys(config.INVESTOPEDIA_PASSW)
-
-        buttonLogin = self.driver.find_element_by_id('login')
-        buttonLogin.click()
+        buttonLogin = self.driver.find_element_by_id('login').click()
 
         self.driver.implicitly_wait(10)
 
     def scrapeAccCash(self):
-        tradeUrl = 'https://www.investopedia.com/simulator/trade/tradestock.aspx'
-        self.driver.get(tradeUrl)
+        self.driver.get('https://www.investopedia.com/simulator/trade/tradestock.aspx')
         accBuyingCash = self.driver.find_elements_by_class_name('num')  #or 'value'. They are  different calsses
         account = (accBuyingCash[0].text).replace('$', '').replace(',', '')
         cash =  (accBuyingCash[2].text).replace('$', '').replace(',', '')
         return float(account), float(cash)
 
     def getTradePage(self):
-        tradeUrl = 'https://www.investopedia.com/simulator/trade/tradestock.aspx'
-        self.driver.get(tradeUrl)
+        self.driver.get('https://www.investopedia.com/simulator/trade/tradestock.aspx')
 
-    def acceptCookies (self):
+    def acceptCookies(self):
         self.driver.implicitly_wait(0.5)
+        
         try:
-            acceptCookie = self.driver.find_element_by_id('gdpr-notification-banner__btn-close_1-0')
-            acceptCookie.click()
+            self.driver.find_element_by_id('gdpr-notification-banner__btn-close_1-0').click()
         except:
             pass
+        
         self.driver.implicitly_wait(10)
     
+    def setStock(self, ticker):
+        self.driver.find_element_by_id('symbolTextbox').send_keys(ticker)
+        self.driver.find_element_by_id('symbolTextbox_mi_1').click()
 
-    def setStock (self, ticker):
-        stockSymbolTxtBox = self.driver.find_element_by_id('symbolTextbox')
-        stockSymbolTxtBox.send_keys(ticker)
-        selectSymbol= self.driver.find_element_by_id('symbolTextbox_mi_1')
-        selectSymbol.click()
-
-    def setTransaction (self, transaction):
+    def setTransaction(self, transaction):
         orderDict = {
             'Buy': 0,
             'Sell' : 1,
             'Sell Short' : 2,
             'Buy to Cover' : 3        
         }
-        orderNumber = orderDict.get(transaction)
-        transactionList = self.driver.find_element_by_id('transactionTypeDropDown')
-        selectItem = Select(transactionList)
-        selectItem.select_by_index(orderNumber)
+        Select(self.driver.find_element_by_id('transactionTypeDropDown')).select_by_index(orderDict.get(transaction))
 
-    
-    def getMaxQuantity (self):
-        showMax = self.driver.find_element_by_id('showMaxLink')  
-        showMax.click()
+    def getMaxQuantity(self):
+        self.driver.find_element_by_id('showMaxLink').click()
         
         time.sleep(0.5)
         maxQuantityText = self.driver.find_element_by_id('limitationLabel')
@@ -112,39 +99,35 @@ class Scraping:
                 maxQuantity = int(word)
         return maxQuantity
 
-    def setQuantity (self, quantity):
-        qunatityTxtBox = self.driver.find_element_by_id('quantityTextbox')
-        qunatityTxtBox.send_keys(quantity)
+    def setQuantity(self, quantity):
+        self.driver.find_element_by_id('quantityTextbox').send_keys(quantity)
 
-    def setOrderType (self, orderType, limitPrice):
+    def setOrderType(self, orderType, limitPrice):
         if(orderType == "Limit"):
-            limitOrderSelection = self.driver.find_element_by_id('limitRadioButton')
-            limitOrderSelection.click()
-            limitPriceTxtBox = self.driver.find_element_by_id('limitPriceTextBox')
-            limitPriceTxtBox.send_keys(str(limitPrice))
+            self.driver.find_element_by_id('limitRadioButton').click()
+            self.driver.find_element_by_id('limitPriceTextBox').send_keys(str(limitPrice))
     
-    def setSendEmail (self, sendEmail):
+    def setSendEmail(self, sendEmail):
         if sendEmail == False:
-            sendConfirmationEmail = self.driver.find_element_by_id('sendConfirmationEmailCheckBox')
-            sendConfirmationEmail.click()
+            sendConfirmationEmail = self.driver.find_element_by_id('sendConfirmationEmailCheckBox').click()
 
-    def previewAndSubmit (self):
-        previewOrder = self.driver.find_element_by_id('previewButton')
-        previewOrder.click()
-        
-        submitOrder = self.driver.find_element_by_id('submitOrder')
-        submitOrder.click()
+    def previewAndSubmit(self):
+        self.driver.find_element_by_id('previewButton').click()
+        self.driver.find_element_by_id('submitOrder').click()
 
-    def executeOrder (self, ticker , transaction, quantity, orderType, limitPrice, sendEmail = True):
+    def executeOrder(self, ticker , transaction, quantity, orderType, limitPrice, sendEmail = True):
         self.getTradePage()
         self.acceptCookies()
         self.setStock(ticker)
         self.setTransaction(transaction)
+        
         maxQuantity = self.getMaxQuantity()
         if quantity > maxQuantity:
             quantity = maxQuantity
+            
         self.setQuantity(quantity)
         self.setOrderType(orderType, limitPrice)
         self.setSendEmail(sendEmail)
         self.previewAndSubmit()
+        
         return maxQuantity
