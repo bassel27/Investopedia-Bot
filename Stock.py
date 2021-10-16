@@ -1,14 +1,13 @@
 from typing import Counter
 from yahoo_fin import stock_info as si
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
+import threading, functions
+
 import tkinterFunctions 
-import functions
 from Scraping import *
 from Scrollbar import * 
-import threading
-from tkinter import ttk
-import tkinterFunctions
 
 def organizeOutput(root, n, stock): 
     counter = 0
@@ -23,14 +22,11 @@ def organizeOutput(root, n, stock):
             column =0
             row += 1
 
-
 counter = 0
 scraping = Scraping()
 threads = []
 
 class Stock:
-
-
     def takeScreenshot (self):
         scraping.openWebDriver()
         scraping.getFinviz(self.ticker)
@@ -40,7 +36,6 @@ class Stock:
         scraping.quitDriver()
         self.graph = PhotoImage(file='currentStock.png')    
         
-
     def frameInputStock(self, root, winChance, stock, risk, account):
         frameInput = LabelFrame(root)
         frameInput.pack()
@@ -123,8 +118,6 @@ class Stock:
 
                     stock.append(Stock())
                     stock[counter].frameInputStock(root, winChance, stock, risk, account)
-
-            
             except:
                 if wasWinChanceNull == True:
                     winChance = None
@@ -132,9 +125,6 @@ class Stock:
                 frameInput.destroy()
                 stock[counter].frameInputStock(root, winChance, stock, risk, account)
             
-            
-
-        
         def checkEntry(event):
             nonlocal wasWinChanceNull
             if wasWinChanceNull == True:
@@ -152,22 +142,16 @@ class Stock:
                     buttonNextStock.config(state=DISABLED)
                     buttonFinish.config(state=DISABLED)
             
-
         entryTargetPrice.bind('<KeyRelease>',checkEntry)         
         entrystopLoss.bind('<KeyRelease>', checkEntry)
         if wasWinChanceNull == True:
             entryWinChance.bind('<KeyRelease>', checkEntry)  
 
-        
         buttonNextStock = ttk.Button(frameInput, text = "Onto the next stock", command = clickNextStock, state = DISABLED)
         buttonNextStock.grid(row = 5, column =1)
         buttonFinish = ttk.Button(frameInput, text = "Finish", command = lambda: clickNextStock(isFinished = True), state=DISABLED)
         buttonFinish.grid(row = 6, column =1)
         
-            
-
-
-
     def frameOutput(self, root, rowNo, columnNo, counter, stock):
         def setEntryLimitPrice (entryLimitPrice):
             entryLimitPrice.delete(0, 'end')
@@ -189,7 +173,8 @@ class Stock:
         var.set("Limit")
         options = ["Limit", "Market"]
         orderTypeDropDown = ttk.OptionMenu(frameOutput, var, options[0], *options )
-        orderTypeDropDown.grid(row = 2, column = 0, sticky = 'w')        
+        orderTypeDropDown.grid(row = 2, column = 0, sticky = 'w')  
+              
         def dropDownFunction(*args):
             if var.get() == options[0]:
                 setEntryLimitPrice(entryLimitPrice)        
@@ -198,9 +183,9 @@ class Stock:
                 entryLimitPrice.grid_forget()
         var.trace('w', dropDownFunction)
 
-
         Label(frameOutput, text = "Stop loss: " + str(self.stopLoss) + " $").grid(row = 3, column = 0, sticky = 'w')
         Label(frameOutput, text = "Expected profit: " + str(round(self.expectedProfit, 2))+ " $").grid(row = 4, column =0, sticky = 'w')
+        
         if self.isLong == True:
             labelSharesLonged = Label(frameOutput, text = "Shares longed: " + str(self.quantity))
             labelSharesLonged.grid(row = 5, column = 0, sticky = 'w')
@@ -240,38 +225,8 @@ class Stock:
                     else:
                         labelSharesShorted.destroy()
                         Label(frameOutput, text = "Shares shorted: " + str(self.quantity)).grid(row = 5, column = 0, sticky = 'w')
-                    
-                stock[counter-1].addNotionRow()
 
-                
-        
         Label(frameOutput, text = "Execute trade?").grid(row = 8, column = 0, sticky = 'w')
         checkButtonExecuteVar = IntVar()
         checkButtonExecute = ttk.Checkbutton(frameOutput, variable = checkButtonExecuteVar, command = isCheckButtonChecked)
         checkButtonExecute.grid(row = 8, column = 1)
-        counter +=1
-
-
-    def addNotionRow(self):
-        from notion.client import NotionClient
-        from datetime import date
-
-        token = creds.token
-        client = NotionClient(token_v2=token)
-        listUrl = 'https://www.notion.so/19338d10174b463cb6ce4fba6e82c18a?v=5237d4d9360d4deaaf9b79e59ae05edb'
-        collectionView = client.get_collection_view(listUrl)
-        if tkinterFunctions.cash>= self.cost: #error
-            newRow = collectionView.collection.add_row()
-            newRow.Ticker = self.ticker # to capitalize the string
-            newRow.Quantity = self.quantity
-            newRow.Filled_in_by_python = True
-            newRow.Stop_loss = str(self.stopLoss)
-            newRow.Expected_profit = str(round(self.expectedProfit, 2))
-            if self.isLong == True:
-                newRow.Strategy = "Long"
-                newRow.Date_Bought = date.today()
-                newRow.Buy_Price = self.currentPrice
-            else:
-                newRow.Strategy = "Short"
-                newRow.Date_Sold = date.today()
-                newRow.Selling_Price = self.targetPrice

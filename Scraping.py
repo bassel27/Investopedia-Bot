@@ -3,18 +3,17 @@ from selenium import webdriver
 from selenium.webdriver.support.select import Select
 from webdriver_manager.chrome import ChromeDriverManager
 from PIL import Image
-import os
-import creds
-import time
+import os, time
+
+import config
 
 class Scraping:
     def openWebDriver(self):
-        ublockPath = r'C:\Users\Bassel Attia\Documents\Investopedia Bot\1.37.2_0'
         chromeOptions = Options()
         chromeOptions.add_argument("--log-level=3")
         # chromeOptions.add_argument('--headless')
         # chromeOptions.add_argument('--log-level=1')
-        chromeOptions.add_argument('load-extension=' + ublockPath)
+        chromeOptions.add_argument('load-extension=' + os.getenv('APPDATA') + r'\..\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm\1.38.6_0')
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chromeOptions)     #to create the instance of chrome WebDriver
         self.driver.set_window_position(-10000,0)
         
@@ -52,8 +51,8 @@ class Scraping:
         username = self.driver.find_element_by_id('username')
         password = self.driver.find_element_by_id('password')
 
-        username.send_keys(creds.username)
-        password.send_keys(creds.password)
+        username.send_keys(config.INVESTOPEDIA_EMAIL)
+        password.send_keys(config.INVESTOPEDIA_PASSW)
 
         buttonLogin = self.driver.find_element_by_id('login')
         buttonLogin.click()

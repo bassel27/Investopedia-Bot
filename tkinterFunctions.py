@@ -1,9 +1,10 @@
 from tkinter import *
+from tkinter import ttk
 from tkinter import messagebox
 from functions import *
 from Stock import *
+
 from Scraping import *
-from tkinter import ttk
 
 def atExit(root):
     def exitMessage():
@@ -14,7 +15,6 @@ def atExit(root):
             except:
                 pass
             root.destroy()
-
         else:
             pass
 
@@ -28,12 +28,9 @@ def intro(root):
     global frameInput 
     frameInput = ttk.LabelFrame(root)
     frameInput.pack()
-    root.iconbitmap(r'C:\Users\Bassel Attia\Documents\Investopedia Bot\money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
-
-
+    root.iconbitmap(r'money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
 
 def enableButtonNext(root):
-
     def clickNext():
         try:
             if checkButtonRiskVar:
@@ -60,12 +57,8 @@ def enableButtonNext(root):
         stock.append(Stock())
         stock[0].frameInputStock(root, winChance, stock, risk, account)
             
-
-
     buttonNext = ttk.Button(frameInput, text = "Next!", command= clickNext)   #note that the function name is mentioned without
     buttonNext.grid(row = 2, column = 1, ipady=2, ipadx=20)
-    
-    
 
 def checkButtonStuff():
     def isCheckButtonChecked():
@@ -76,7 +69,6 @@ def checkButtonStuff():
                 labelRisk.grid( row = 0, column = 2)
                 entryRisk.grid(row = 0, column = 3)
                 
-
     global checkButtonRiskVar
     checkButtonRiskVar = IntVar(value = 1)
     checkButtonIsRiskDefault = ttk.Checkbutton(frameInput, variable = checkButtonRiskVar, command=isCheckButtonChecked)
@@ -93,9 +85,6 @@ def checkButtonStuff():
     Label(frameInput, text="Make chance = 0.9?").grid(row=1, column = 0, sticky = 'w')
     checkButtonIsChanceDefault.grid(row = 1, column = 1)
 
-
-
-
 def  frameAccAndCash(root):
     global account, cash
     scraping = Scraping()
@@ -107,8 +96,6 @@ def  frameAccAndCash(root):
     frameAccAndCash = ttk.LabelFrame(root)
     frameAccAndCash.pack()
     Label(frameAccAndCash, fg = 'green', text = ("Account value = " + str(account)+ " $"+ "   -   " + "cash = "+ str(cash) + " $")).grid(column =1 , row =0)
-
-
 
 def frameInputAll(root):
     intro(root)
