@@ -5,7 +5,7 @@ Investopedia Bot is a tkitner python program that's suitable for beginners who w
 
 ## What Does Investopedia Bot do?
 Investopedia Bot asks you to enter the stocks you're interested in to calculate their expectancies (a measure to show which stocks are less risky and gonna make you more money).
-It also shows you stock data and recommends you the number of shares to be bought according to many factors that you decide on; all of that in order to facilitate reaching a decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically as well as make a new record in your Notion database (trading journal) with the info of your trade. 
+It also shows you stock data and recommends you the number of shares to be bought according to many factors that you decide on; all of that in order to facilitate reaching a decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically.
 
 ## Setup
 1. Go to your location of choice & install repository `git clone https://github.com/IakovTaranenko/Investopedia-Bot`
@@ -25,6 +25,6 @@ Then, you'll have this window for each stock that you're interested in. The firs
 
 ![image](https://user-images.githubusercontent.com/40627412/136844395-f4694ab3-1a72-474d-9629-348207852646.png)
 ### Third Stage
-After you enter the stocks you're interested in, the results are displayed and the stocks are ranked descendingly according to expectancy. You get to choose the type of order (either market or limit order) and also specify the price of the limit order (the limit price is by default `current price ± 0.02`). The number of shares that are to be bought/ shorted is displayed. The number of shares is calculated through the following rule: `position size (number of shares) = Max loss per trade/ amount you can lose per share` or in other words: `position size (number of shares) = quantity = account value * (risk percentage / 100) / (|current price - stop loss price|)`. Upon clicking on "Execute order", the order is automatically placed on Investopedia and a new record on your notion database is formed with the details of the trade.
+After you enter the stocks you're interested in, the results are displayed and the stocks are ranked descendingly according to expectancy. You get to choose the type of order (either market or limit order) and also specify the price of the limit order (the limit price is by default `current price ± 0.02`). The number of shares that are to be bought/ shorted is displayed. The number of shares is calculated through the following rule: `position size (number of shares) = Max loss per trade/ amount you can lose per share` or in other words: `position size (number of shares) = quantity = account value * (risk percentage / 100) / (|current price - stop loss price|)`.
 
 ![image](https://user-images.githubusercontent.com/40627412/136072260-660f6a72-d608-48ef-b480-ac4e3728974b.png)
