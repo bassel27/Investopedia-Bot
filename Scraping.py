@@ -56,11 +56,13 @@ class Scraping:
         self.driver.implicitly_wait(10)
 
     def scrapeAccCash(self):
-        self.driver.get('https://www.investopedia.com/simulator/trade/tradestock.aspx')
+        tradeUrl = 'https://www.investopedia.com/simulator/trade/tradestock.aspx'
+        self.driver.get(tradeUrl)
         accBuyingCash = self.driver.find_elements_by_class_name('num')  #or 'value'. They are  different calsses
         account = (accBuyingCash[0].text).replace('$', '').replace(',', '')
         cash =  (accBuyingCash[2].text).replace('$', '').replace(',', '')
         return float(account), float(cash)
+        
 
     def getTradePage(self):
         self.driver.get('https://www.investopedia.com/simulator/trade/tradestock.aspx')
@@ -86,7 +88,10 @@ class Scraping:
             'Sell Short' : 2,
             'Buy to Cover' : 3        
         }
-        Select(self.driver.find_element_by_id('transactionTypeDropDown')).select_by_index(orderDict.get(transaction))
+        orderNumber = orderDict.get(transaction)
+        transactionList = self.driver.find_element_by_id('transactionTypeDropDown')
+        selectItem = Select(transactionList)
+        selectItem.select_by_index(orderNumber)
 
     def getMaxQuantity(self):
         self.driver.find_element_by_id('showMaxLink').click()
