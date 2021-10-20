@@ -8,10 +8,10 @@ Investopedia Bot asks you to enter the stocks you're interested in to calculate 
 It also shows you stock data and recommends you the number of shares to be bought according to many factors that you decide on; all of that in order to facilitate reaching a decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically.
 
 ## Setup
-1. Install repository `git clone https://github.com/IakovTaranenko/Investopedia-Bot`
+1. Install repository `git clone git@github.com:bassel27/Investopedia-Bot.git`
 2. CD into repository `cd Investopedia-Bot`
 3. Install required libraries `pip install -r requirements.txt`
-4. Install UBlock Origin on Google Chrome ([quick link](shorturl.at/qvCLM))
+4. Install UBlock Origin on Google Chrome shorturl.at/qvCLM)
 5. Change Investopedia login info in the `config.py` file
 6. Start the program `python main.py`
 
