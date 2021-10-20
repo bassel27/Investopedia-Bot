@@ -1,0 +1,5 @@
+selenium
+Pillow
+webdriver_manager
+yahoo_fin
+functions
