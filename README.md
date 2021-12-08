@@ -1,11 +1,6 @@
 # Investopedia-Bot
 ![Investopedia-2017](https://user-images.githubusercontent.com/40627412/136075564-c1179715-164c-4e87-b81c-154adf20fb41.png)
 
-A tkitner python program made for beginners in the automation of trading. First, why I chose Investopedia as stock simulator platform? It is an excellent simulator that is always recommend for beginners due to its simplicity. Second, where did the idea come from? The idea stemmed from my need to calculate the expectancy of stocks that I'm interested in to decide on the stock that I will buy. This process of calculating the expectancy of each stock is very exhausting, so I thought about automating the process through my programming skills. The program developed through time to become a "platform" for Investopedia automation.
-
-## What Does Investopedia Bot do?
-Investopedia Bot asks you to enter the stocks you're interested in to calculate their expectancies .
-It also shows you stock data and recommends you the number of shares to be bought according to many factors that you decide on; all of that in order to facilitate reaching a decisoin. After you choose the stocks that you want to trade, you can execute the trade from the program automatically.
 A GUI python program made for beginners in the automation of trading. It calculates expectancies of stocks (a measure which shows which stocks are less risky and are expected to make more money), shows stock data and graphs and recommends the number of shares to buy according to many variables determined by the user. After choosing stocks, trades can be executed from the program automatically.
 ## Setup
 1. Install repository `git clone git@github.com:bassel27/Investopedia-Bot.git`
