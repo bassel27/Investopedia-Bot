@@ -1,7 +1,7 @@
 # Investopedia-Bot
 ![Investopedia-2017](https://user-images.githubusercontent.com/40627412/136075564-c1179715-164c-4e87-b81c-154adf20fb41.png)
 
-A GUI python program made for beginners in the automation of trading. It calculates expectancies of stocks (a measure which shows which stocks are less risky and are expected to make more money), shows stock data and graphs and recommends the number of shares to buy according to many variables determined by the user. After choosing stocks, trades can be executed from the program automatically.
+A GUI python program made for beginners in the automation of trading. It calculates expectancies of stocks (measures which stocks are less risky and are expected to make more money), shows stock data and graphs and recommends the number of shares to buy according to many variables determined by the user. After choosing stocks, trades can be executed from the program automatically.
 ## Setup
 1. Install repository `git clone git@github.com:bassel27/Investopedia-Bot.git`
 2. CD into repository `cd Investopedia-Bot`
