@@ -92,7 +92,7 @@ class Stock:
                 if self.isLong == True:
                     self.transaction = "Buy"
                 else:
-                    self.transaction = "Sell Short"
+                    self.transaction = "Short"
                 frameInput.destroy()
                 
                 if(wasWinChanceNull == True):
