@@ -16,7 +16,7 @@ Upon running the program, you get this window which asks you about the **risk pe
 
 ![image](https://user-images.githubusercontent.com/40627412/136844357-76fa68f2-5ea8-4626-b633-ba1c21baef12.png)
 ### Seocnd Stage
-Then, you'll have this window for each stock that you're interested in. The first entry is for the ticker (symbol) of the stock. The second is for the target price (what price you think the stock will reach). The third entry is for the stop loss price (the price at which you accept your loss and exit the trade.) If you've got more stocks that you're intersted in, then you can press "Onto the next stock" button. If this is the last stock, then you can press "finish" to display the results.
+Then, you'll have this window for each stock that you're interested in. The first entry is for the ticker (symbol) of the stock. The second is for the target price (the price that you think the stock will reach). The third entry is for the stop loss price (the price at which you accept your loss and exit the trade.) If you've got more stocks that you're intersted in, then you can press "Onto the next stock" button. If this is the last stock, then you can press "finish" to display the results.
 
 ![image](https://user-images.githubusercontent.com/40627412/136844395-f4694ab3-1a72-474d-9629-348207852646.png)
 ### Third Stage
