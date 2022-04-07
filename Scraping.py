@@ -4,8 +4,11 @@ from selenium.webdriver.support.select import Select
 from webdriver_manager.chrome import ChromeDriverManager
 from PIL import Image
 import os, time
-
+import threading
+from selenium.webdriver.common.by import By
 import config
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class Scraping:
     def openWebDriver(self):
@@ -13,7 +16,7 @@ class Scraping:
         chromeOptions.add_argument("--log-level=3")
         # chromeOptions.add_argument('--headless')
         # chromeOptions.add_argument('--log-level=1')
-        chromeOptions.add_argument('load-extension=' + os.getenv('APPDATA') + r'\..\Local\Google\Chrome\User Data\Default\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm\1.38.6_0')
+        chromeOptions.add_extension('extension_1_41_2_0.crx')
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chromeOptions)     #to create the instance of chrome WebDriver
         self.driver.set_window_position(-10000,0)
         
@@ -47,92 +50,88 @@ class Scraping:
 
     def login(self):
         self.driver.get(r'https://www.investopedia.com/simulator/home.aspx')
-
-        self.driver.find_element_by_id('username').send_keys(config.INVESTOPEDIA_EMAIL)
-        self.driver.find_element_by_id('password').send_keys(config.INVESTOPEDIA_PASSW)
-
-        buttonLogin = self.driver.find_element_by_id('login').click()
-
         self.driver.implicitly_wait(10)
+        #implement threading here .....................................................
+        username = self.driver.find_element(By.ID, 'username')
+        username.send_keys(config.INVESTOPEDIA_EMAIL)
+        time.sleep(0.5)
+        
+        self.driver.find_element(By.ID, 'password').send_keys(config.INVESTOPEDIA_PASSW)
+        time.sleep(0.5)
+        
+        self.driver.find_element(By.ID, 'login').click()
+        try:
+            self.getTradePage()
+        except:
+            self.login()
+    
+    def getTradePage(self):
+        self.driver.find_element(By.XPATH, '//a[@class="text-h6 white--text pl-8 pr-8 v-tab"]').click()
 
-    def scrapeAccCash(self):
-        tradeUrl = 'https://www.investopedia.com/simulator/trade/tradestock.aspx'
-        self.driver.get(tradeUrl)
-        accBuyingCash = self.driver.find_elements_by_class_name('num')  #or 'value'. They are  different calsses
-        account = (accBuyingCash[0].text).replace('$', '').replace(',', '')
-        cash =  (accBuyingCash[2].text).replace('$', '').replace(',', '')
+    def scrapeAccCash(self):   
+        time.sleep(2)     
+        account = self.driver.find_element(By.XPATH, '//div[@data-cy="account-value"]').text
+        cash = self.driver.find_element(By.XPATH, '//div[@data-cy="cash"]').text
+        account = account.replace('$', '').replace(',', '')
+        cash =  cash.replace('$', '').replace(',', '')
         return float(account), float(cash)
         
-
-    def getTradePage(self):
-        self.driver.get('https://www.investopedia.com/simulator/trade/tradestock.aspx')
-
-    def acceptCookies(self):
-        self.driver.implicitly_wait(0.5)
-        
-        try:
-            self.driver.find_element_by_id('gdpr-notification-banner__btn-close_1-0').click()
-        except:
-            pass
-        
-        self.driver.implicitly_wait(10)
     
     def setStock(self, ticker):
-        self.driver.find_element_by_id('symbolTextbox').send_keys(ticker)
-        self.driver.find_element_by_id('symbolTextbox_mi_1').click()
+        self.driver.find_element(By.XPATH,'//input[@placeholder="Look up Symbol/Company Name"]').send_keys(ticker)
+        self.driver.find_element(By.XPATH, '//span[@data-cy="symbol-description"]').click()
 
     def setTransaction(self, transaction):
-        orderDict = {
-            'Buy': 0,
-            'Sell' : 1,
-            'Sell Short' : 2,
-            'Buy to Cover' : 3        
-        }
-        orderNumber = orderDict.get(transaction)
-        transactionList = self.driver.find_element_by_id('transactionTypeDropDown')
-        selectItem = Select(transactionList)
-        selectItem.select_by_index(orderNumber)
+        self.driver.find_element(By.CLASS_NAME, 'v-select__selections').click()
+        self.driver.find_element(By.XPATH, "//*[text()='" + transaction + "']").click()
+
+    def removePopup(self):
+        self.driver.find_element(By.XPATH, '//span[@style="color: rgb(255, 255, 255);"]').click()
 
     def getMaxQuantity(self):
-        self.driver.find_element_by_id('showMaxLink').click()
-        
-        time.sleep(0.5)
-        maxQuantityText = self.driver.find_element_by_id('limitationLabel')
-        maxQuantity = 0
-        for word in (maxQuantityText.text).split():
-            if word.isdigit():
-                maxQuantity = int(word)
+        self.driver.find_element(By.XPATH, '(//span[@class="v-btn__content"])[7]').click()
+        quantityEntry = self.driver.find_element(By.XPATH, '//input[@data-cy="quantity-input"]')
+        time.sleep(2)
+        maxQuantity = quantityEntry.get_attribute("value")
         return maxQuantity
+
 
     def setQuantity(self, quantity):
-        self.driver.find_element_by_id('quantityTextbox').send_keys(quantity)
+        self.driver.find_element(By.XPATH, '//input[@data-cy="quantity-input"]').send_keys(quantity)
 
-    def setOrderType(self, orderType, limitPrice):
-        if(orderType == "Limit"):
-            self.driver.find_element_by_id('limitRadioButton').click()
-            self.driver.find_element_by_id('limitPriceTextBox').send_keys(str(limitPrice))
+    def setOrderType(self, orderType, limitPrice = 0):
+        self.driver.find_element(By.XPATH, '(//div[@class="v-select__selections"])[2]').click()
     
-    def setSendEmail(self, sendEmail):
-        if sendEmail == False:
-            sendConfirmationEmail = self.driver.find_element_by_id('sendConfirmationEmailCheckBox').click()
 
-    def previewAndSubmit(self):
-        self.driver.find_element_by_id('previewButton').click()
-        self.driver.find_element_by_id('submitOrder').click()
+        self.driver.find_element(By.XPATH, "//*[text()='" + orderType + "']").click()
+        self.driver.find_element(By.XPATH, '//input[@data-cy="limit-input"]').send_keys(limitPrice)
+    
+    def preview(self):
+        self.driver.find_element(By.XPATH, '(//span[@class="v-btn__content"])[9]').click()
+
+    def submit(self):
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, '(//span[@class="v-btn__content"])[11]').click()
 
     def executeOrder(self, ticker , transaction, quantity, orderType, limitPrice, sendEmail = True):
-        self.getTradePage()
-        self.acceptCookies()
+        self.openWebDriver()
+        self.login()
         self.setStock(ticker)
-        self.setTransaction(transaction)
+        try:
+            self.removePopup()
+        except:
+            pass
+        if transaction != 'Buy':
+            self.setTransaction(transaction)
         
         maxQuantity = self.getMaxQuantity()
-        if quantity > maxQuantity:
+        if maxQuantity < quantity:
             quantity = maxQuantity
-            
         self.setQuantity(quantity)
-        self.setOrderType(orderType, limitPrice)
-        self.setSendEmail(sendEmail)
-        self.previewAndSubmit()
         
-        return maxQuantity
+        if orderType != "Market":    
+            self.setOrderType(orderType, limitPrice)
+            
+        self.preview()
+        self.submit()
+        

@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from functions import *
 from Stock import *
+from sys import platform
 
 from Scraping import *
 
@@ -25,7 +26,10 @@ def intro(root):
     global frameInput 
     frameInput = ttk.LabelFrame(root)
     frameInput.pack()
-    root.iconbitmap(r'money_icon.ico')      #because it's in the same directory as your program, you don't need to type the whole address
+    if platform == "linux" or platform == "linux2":
+        root.iconbitmap(r'@money_icon_lin.xbm')      
+    elif platform == "win32":
+        root.iconbitmap(r'money_icon_win.ico')      
 
 def enableButtonNext(root):
     def clickNext():
@@ -85,6 +89,7 @@ def  frameAccAndCash(root):
     scraping = Scraping()
     scraping.openWebDriver()
     scraping.login()
+    scraping.getTradePage
     account, cash = scraping.scrapeAccCash()
     scraping.quitDriver()
     global frameAccAndCash
