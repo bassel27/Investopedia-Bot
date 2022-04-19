@@ -6,9 +6,8 @@ A GUI python program made for beginners in the automation of trading. It calcula
 1. Install repository `git clone git@github.com:bassel27/Investopedia-Bot.git`
 2. CD into repository `cd Investopedia-Bot`
 3. Install required libraries `pip install -r requirements.txt`
-4. Install UBlock Origin on Google Chrome https://www.shorturl.at/qvCLM
-5. Change Investopedia login info in the `config.py` file
-6. Start the program `python main.py`
+4. Change Investopedia login info in the `config.py` file
+5. Start the program `python main.py`
 
 ## How to Use Investopedia Trading?
 ### First Stage
