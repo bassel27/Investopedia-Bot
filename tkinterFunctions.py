@@ -26,10 +26,10 @@ def intro(root):
     global frameInput 
     frameInput = ttk.LabelFrame(root)
     frameInput.pack()
-    if platform == "linux" or platform == "linux2":
-        root.iconbitmap(r'@money_icon_lin.xbm')      
-    elif platform == "win32":
+    try:
         root.iconbitmap(r'money_icon_win.ico')      
+    except:
+        pass
 
 def enableButtonNext(root):
     def clickNext():
@@ -84,6 +84,10 @@ def checkButtonStuff():
     Label(frameInput, text="Make chance = 0.9?").grid(row=1, column = 0, sticky = 'w')
     checkButtonIsChanceDefault.grid(row = 1, column = 1)
 
+# def recommendStocks():
+#     recommendButton = ttk.Button(frameInput, text = "Recommend me some stocks!")
+#     recommendButton.grid(row = 3, column = 1)
+
 def  frameAccAndCash(root):
     global account, cash
     scraping = Scraping()
@@ -101,3 +105,4 @@ def frameInputAll(root):
     intro(root)
     checkButtonStuff()
     enableButtonNext(root)
+    # recommendStocks()

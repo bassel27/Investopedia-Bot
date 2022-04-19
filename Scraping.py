@@ -1,13 +1,11 @@
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-from selenium.webdriver.support.select import Select
 from webdriver_manager.chrome import ChromeDriverManager
 from PIL import Image
 import os, time
 import threading
 from selenium.webdriver.common.by import By
 import config
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class Scraping:
@@ -16,9 +14,9 @@ class Scraping:
         chromeOptions.add_argument("--log-level=3")
         # chromeOptions.add_argument('--headless')
         # chromeOptions.add_argument('--log-level=1')
-        chromeOptions.add_extension('extension_1_41_2_0.crx')
+        chromeOptions.add_extension('ublock_origin.crx')
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chromeOptions)     #to create the instance of chrome WebDriver
-        self.driver.set_window_position(-10000,0)
+        # self.driver.set_window_position(-10000,0)
         
     def getFinviz(self, ticker):
         self.driver.get('https://finviz.com/quote.ashx?t=' + ticker)
@@ -93,7 +91,7 @@ class Scraping:
         quantityEntry = self.driver.find_element(By.XPATH, '//input[@data-cy="quantity-input"]')
         time.sleep(2)
         maxQuantity = quantityEntry.get_attribute("value")
-        return maxQuantity
+        return float(maxQuantity)
 
 
     def setQuantity(self, quantity):
