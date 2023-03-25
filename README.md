@@ -10,7 +10,7 @@ yahoo_fin: get up-to-date stock price.
 
 ## Setup
 To get started with Investopedia-Bot, follow these steps:
-  1. Clone the repository: git clone [git@github.com:bassel27/Investopedia-Bot.git](https://github.com/bassel27/Investopedia-Bot.git)
+  1. Clone the repository: git clone https://github.com/bassel27/Investopedia-Bot.git
   2. Change the working directory to the cloned repository: cd Investopedia-Bot
   3. Install the required libraries: pip install -r requirements.txt
   4. Update your Investopedia login credentials in the config.py file
