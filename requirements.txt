@@ -1,5 +1,4 @@
-selenium
-Pillow
-webdriver_manager
-yahoo_fin
-functions
+Pillow==9.4.0
+selenium==4.8.3
+webdriver_manager==3.5.4
+yahoo_fin==0.8.9.1
