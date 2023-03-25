@@ -208,8 +208,8 @@ class Stock:
                 except:
                     limitPrice = 0
 
-                scraping.openWebDriver()
-                scraping.login()
+                
+                
                 maxQuantity = scraping.executeOrder(self.ticker, self.transaction, self.quantity, orderType, limitPrice)
                 scraping.quitDriver()
 
@@ -233,26 +233,26 @@ class Stock:
         checkButtonExecute = ttk.Checkbutton(frameOutput, variable = checkButtonExecuteVar, command = isCheckButtonChecked)
         checkButtonExecute.grid(row = 8, column = 1)
 
-    def addNotionRow(self):
-        from notion.client import NotionClient
-        from datetime import date
+    # def addNotionRow(self):
+    #     from notion.client import NotionClient
+    #     from datetime import date
 
-        token = config.token
-        client = NotionClient(token_v2=token)
-        listUrl = 'https://www.notion.so/19338d10174b463cb6ce4fba6e82c18a?v=5237d4d9360d4deaaf9b79e59ae05edb'
-        collectionView = client.get_collection_view(listUrl)
-        if tkinterFunctions.cash>= self.cost: #error
-            newRow = collectionView.collection.add_row()
-            newRow.Ticker = self.ticker # to capitalize the string
-            newRow.Quantity = self.quantity
-            newRow.Filled_in_by_python = True
-            newRow.Stop_loss = str(self.stopLoss)
-            newRow.Expected_profit = str(round(self.expectedProfit, 2))
-            if self.isLong == True:
-                newRow.Strategy = "Long"
-                newRow.Date_Bought = date.today()
-                newRow.Buy_Price = self.currentPrice
-            else:
-                newRow.Strategy = "Short"
-                newRow.Date_Sold = date.today()
-                newRow.Selling_Price = self.targetPrice
+    #     token = config.token
+    #     client = NotionClient(token_v2=token)
+    #     listUrl = 'https://www.notion.so/19338d10174b463cb6ce4fba6e82c18a?v=5237d4d9360d4deaaf9b79e59ae05edb'
+    #     collectionView = client.get_collection_view(listUrl)
+    #     if tkinterFunctions.cash>= self.cost: #error
+    #         newRow = collectionView.collection.add_row()
+    #         newRow.Ticker = self.ticker # to capitalize the string
+    #         newRow.Quantity = self.quantity
+    #         newRow.Filled_in_by_python = True
+    #         newRow.Stop_loss = str(self.stopLoss)
+    #         newRow.Expected_profit = str(round(self.expectedProfit, 2))
+    #         if self.isLong == True:
+    #             newRow.Strategy = "Long"
+    #             newRow.Date_Bought = date.today()
+    #             newRow.Buy_Price = self.currentPrice
+    #         else:
+    #             newRow.Strategy = "Short"
+    #             newRow.Date_Sold = date.today()
+    #             newRow.Selling_Price = self.targetPrice

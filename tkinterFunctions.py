@@ -93,7 +93,7 @@ def  frameAccAndCash(root):
     scraping = Scraping()
     scraping.openWebDriver()
     scraping.login()
-    scraping.getTradePage
+    scraping.getTradePage()
     account, cash = scraping.scrapeAccCash()
     scraping.quitDriver()
     global frameAccAndCash
