@@ -7,6 +7,7 @@ Investopedia-Bot is a beginner-friendly GUI Python program that automates stock 
 Selenium: used to scrape Finviz for stock charts and automate trades in the Investopedia stock simulator.
 Pillow: used for Fiviz image manipulation.
 yahoo_fin: get up-to-date stock price.
+Multithreading: Improves performance by handling multiple tasks concurrently, such as scraping and data processing
 
 ## Setup
 To get started with Investopedia-Bot, follow these steps:
