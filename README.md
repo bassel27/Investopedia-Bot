@@ -10,11 +10,11 @@ Additionally, this project was created when I was still learning programming, so
 
 Investopedia-Bot is a beginner-friendly GUI Python program that automates stock trading. The program calculates stock expectancies (measures which stocks are less risky and are expected to make more money), displays stock data and graphs, and recommends the number of shares to buy based on various user-defined variables. Once the user chooses stocks, the program can execute trades automatically.
 
-## Technologies/Libraries Used
-Selenium: used to scrape Finviz for stock charts and automate trades in the Investopedia stock simulator.
-Pillow: used for Fiviz image manipulation.
-yahoo_fin: get up-to-date stock price.
-Multithreading: Improves performance by handling multiple tasks concurrently, such as scraping and data processing
+## Technologies/Libraries Used  
+- **Selenium**: Used to first, scrape Finviz for stock charts and second, automate trades in the Investopedia stock simulator. This project specifically uses **Chrome WebDriver** and employs extensions to block ads for a smoother scraping experience.
+- **Pillow**: Used for Finviz image manipulation.  
+- **yahoo_fin**: Fetches up-to-date stock prices.  
+- **Multithreading**: Improves performance by handling multiple tasks concurrently, such as scraping and data processing.  
 
 ## Setup
 To get started with Investopedia-Bot, follow these steps:
