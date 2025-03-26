@@ -1,5 +1,14 @@
+This project is **no longer maintained** and has been archived. The code remains available for reference.
+  
 # Investopedia-Bot
 ![Investopedia-2017](https://user-images.githubusercontent.com/40627412/136075564-c1179715-164c-4e87-b81c-154adf20fb41.png)
+
+## Project Archived & Code Quality Disclaimer  
+This project has been **archived** and is no longer maintained. No further updates, bug fixes, or support will be provided.  
+
+Additionally, this project was created when I was still learning programming, so the code may not follow best practices or be well-structured. While it may not be the cleanest, it still serves as a reference for my early development journey.
+
+## 📌 About the Project 
 
 Investopedia-Bot is a beginner-friendly GUI Python program that automates stock trading. The program calculates stock expectancies (measures which stocks are less risky and are expected to make more money), displays stock data and graphs, and recommends the number of shares to buy based on various user-defined variables. Once the user chooses stocks, the program can execute trades automatically.
 
