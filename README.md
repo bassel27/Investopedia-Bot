@@ -2,7 +2,7 @@
 ![Investopedia-2017](https://user-images.githubusercontent.com/40627412/136075564-c1179715-164c-4e87-b81c-154adf20fb41.png)
 
 ## Project Archived & Code Quality Disclaimer  
-This project has been **archived** and is no longer maintained. No further updates, bug fixes, or support will be provided.  
+This project has been archived and is no longer maintained. It was originally designed to work with a specific version of the Investopedia stock simulator UI. However, since its development, Investopedia has frequently updated its UI, causing parts of the scraping code to break. That said, if you’re interested in contributing, updating the scraping code to match the new UI would be a valuable improvement to restore functionality.
 
 Additionally, this project was created when I was still learning programming, so the code may not follow best practices or be well-structured. While it may not be the cleanest, it still serves as a reference for my early development journey.
 
@@ -10,7 +10,7 @@ Additionally, this project was created when I was still learning programming, so
 
 Investopedia-Bot is a beginner-friendly GUI Python program that automates stock trading. The program calculates stock expectancies (measures which stocks are less risky and are expected to make more money), displays stock data and graphs, and recommends the number of shares to buy based on various user-defined variables. Once the user chooses stocks, the program can execute trades automatically.
 
-## Technologies/Libraries Used  
+## Technologies/ Libraries Used  
 - **Selenium**: Used to first, scrape Finviz for stock charts and second, automate trades in the Investopedia stock simulator. This project specifically uses **Chrome WebDriver** and employs extensions to block ads for a smoother scraping experience.
 - **Pillow**: Used for Finviz image manipulation.  
 - **yahoo_fin**: Fetches up-to-date stock prices.  
@@ -37,6 +37,3 @@ Once the user enters the risk and chance of winning, they are prompted to enter 
 After the user enters the stocks they are interested in, the program displays the results and ranks the stocks based on expectancy. The user can choose to place a market order or a limit order and specify the limit price (which is `current price ± 0.02` by default). The program calculates the number of shares to buy or short based on the following rule: `position size (number of shares) = Max loss per trade / amount you can lose per share, or position size (number of shares) = quantity = account value * (risk percentage / 100) / (|current price - stop loss price|)`.
 
 ![image](https://user-images.githubusercontent.com/40627412/136072260-660f6a72-d608-48ef-b480-ac4e3728974b.png)
-
-## Limitations and Future Work
-One limitation of the Investopedia-Bot is that it was designed to work with a specific version of the Investopedia stock simulator UI. Since the program's development, Investopedia has updated its UI, which has caused some of the scraping code to break. However, this presents an opportunity for contributors to update the program to work with the latest version of the UI. If you're interested in contributing to the project, updating the scraping code to match the new UI would be a valuable contribution that would help ensure the program continues to function as intended.
