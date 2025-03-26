@@ -24,7 +24,7 @@ To get started with Investopedia-Bot, follow these steps:
   4. Update your Investopedia login credentials in the config.py file
   5. Start the program by running python main.py
 
-## How to Use Investopedia Trading?
+## How to Use Investopedia-Bot?
 ### First Stage
 When the program is launched, it prompts the user to enter the **risk percentage**, which is the maximum amount of cash they are willing to lose on a single trade. The default risk percentage is 2%, but users can enter their own value. The program also asks about the chance of winning for each stock. By default, it is set to 0.9 for all stocks, but users can enter their own value. Below these inputs, the program displays the account value and cash, which are scraped from the user's Investopedia profile.
 
