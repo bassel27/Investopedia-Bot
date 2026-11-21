@@ -1,10 +1,8 @@
 # Investopedia-Bot
 ![Investopedia-2017](https://user-images.githubusercontent.com/40627412/136075564-c1179715-164c-4e87-b81c-154adf20fb41.png)
 
-## Project Archived & Code Quality Disclaimer  
-This project has been archived and is no longer maintained. It was originally designed to work with a specific version of the Investopedia stock simulator UI. However, since its development, Investopedia has frequently updated its UI, causing parts of the scraping code to break. That said, if you’re interested in contributing, updating the scraping code to match the new UI would be a valuable improvement to restore functionality.
-
-Additionally, this project was created when I was still learning programming, so the code may not follow best practices or be well-structured. While it may not be the cleanest, it still serves as a reference for my early development journey.
+## Code Quality Disclaimer  
+This project was created when I was still learning programming, so the code may not follow best practices or be well-structured. While it may not be the cleanest, it still serves as a reference for my early development journey.
 
 ## About the Project 
 
